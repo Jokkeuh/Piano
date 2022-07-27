@@ -1,0 +1,15 @@
+#pianoKeys{
+    display: flex;
+    padding-inline-start: 25px;
+    align-items: center;
+    border: 1px solid black;
+    height: 250px;
+    
+}
+
+.key{
+    float: inline-start;
+    height: 235px;
+    width: 50px;
+    border: 1px solid red;
+}
