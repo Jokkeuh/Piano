@@ -3,7 +3,7 @@ import pianoClicks from "./pianoClicks.js"
 const keyBoard =()=>{
     const keyContainer = document.getElementById("pianoKeys")
     let keys = keyContainer.childNodes
-
+    const keyNote =["C","D","E","F","G","A","B"]
     
     const keyboard = document
     let keyPress = ""
@@ -11,25 +11,52 @@ const keyBoard =()=>{
         keyboard.addEventListener("keydown", (e)=>{
             keyPress = e.key
             playNote(keyPress)
+            console.log(keyPress);
             return keyPress
         })
         
     }
+    
     function createButtonForEach(){
+
+        let i = 0;
         keys.forEach(key => {
+            if(i >= 7){
+               i = 0   
+            }
+
             const keyButton = document.createElement("button")
             keyButton.setAttribute("id", "b" + key.id)
             key.appendChild(keyButton)
+            key.innerHTML = keyNote[i]
+            i++
         });
-        console.log(keys)
+
+        
         return keys
     }
 
 
     function playNote(keyPress){
+        const keyBindings = {"q":0,"s":1,"d":2,"f":3,"g":4,"h":5,
+                              "j":6,"k":7,"l":8,"m":9,"<":10,
+                              "w":11,"x":12,"c":13,"v":14,"b":15,
+                              "n":16,",":17,";":18,":":19,"!":20}
         if(keyPress !== null){
             
-    
+            if(keyPress){
+                
+                for(let key of Object.keys(keyBindings)){
+                    if(key === keyPress){
+                        
+                        keys[keyBindings[key]].click()
+                        keys[keyBindings[key]].style.backgroundColor ="red";
+                        console.log(keys[keyBindings[key]])
+                    }
+                    
+                }
+            }
+    /*
             if(keyPress == "q"){
                 
                 keys[0].click()
@@ -89,7 +116,7 @@ const keyBoard =()=>{
                 keys[9].style.backgroundColor ="red";
                 console.log(keys[9])
                 
-            }
+            }*/
         }
         let delay = 0
         console.log(delay)
