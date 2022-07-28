@@ -2,6 +2,7 @@ import sounds from "./sounds.js"
 
 const pianoClicks =()=>{
     const GetPiano = document.getElementById("pianoKeys")
+    
     GetPiano.addEventListener("click", (e)=>{
         e.preventDefault()
         const low = 2
@@ -10,12 +11,11 @@ const pianoClicks =()=>{
         if(e.target.dataset.set == "low"){
             if(e.target.id == 1){
                 const note = sounds(`C${low}`)
-                console.log(e.target.id)
                 return note.getSound()
-                }
-                if(e.target.id == 2){
-                    const note = sounds(`D${low}`)
-                return note.getSound()
+            }
+            if(e.target.id == 2){
+                const note = sounds(`D${low}`)
+            return note.getSound()
                     // play KeyD
                 }
                 if(e.target.id == 3){
