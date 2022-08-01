@@ -1,20 +1,26 @@
-import pianoClicks from "./pianoClicks.js"
+import activecolor from "./ActiveColor.js"
 
 const keyBoard =()=>{
     const keyContainer = document.getElementById("pianoKeys")
+    const BlackKeyContainer = document.getElementById("pianoBlackKeys")
+
     let keys = keyContainer.childNodes
+    let blackKeys = BlackKeyContainer.childNodes
     const keyNote =["C","D","E","F","G","A","B"]
     
     const keyboard = document
-    let keyPress = ""
+    let keyPress = null
     function Keybind(){
         keyboard.addEventListener("keydown", (e)=>{
             keyPress = e.key
             playNote(keyPress)
+            
+
             console.log(keyPress);
             return keyPress
         })
         
+
     }
     
     function createButtonForEach(){
@@ -35,26 +41,45 @@ const keyBoard =()=>{
         
         return keys
     }
-
+    
 
     function playNote(keyPress){
+        
+
         const keyBindings = {"q":0,"s":1,"d":2,"f":3,"g":4,"h":5,
-                              "j":6,"k":7,"l":8,"m":9,"<":10,
-                              "w":11,"x":12,"c":13,"v":14,"b":15,
-                              "n":16,",":17,";":18,":":19,"!":20}
+                              "j":6,"k":7,"l":8,"m":9,"ù":10,"<":11,
+                              "w":12,"x":13,"c":14,"v":15,"b":16,
+                              "n":17,",":18,";":19,":":20,"!":21}
+
+        const blackKeyBindings = {"a":1,"z":2,"r":3,"t":4,"y":5}
         if(keyPress !== null){
             
             if(keyPress){
+
+
+                for(let Bkey of Object.keys(blackKeyBindings)){
+                    if(Bkey === keyPress){
+                        blackKeys[blackKeyBindings[Bkey]].click()
+                        blackKeys[blackKeyBindings[Bkey]].style.backgroundColor ="red";
+                        blackKeys[blackKeyBindings[Bkey]].dataset.status ="active"
+                        activecolor(blackKeys[blackKeyBindings[Bkey]])
+
+                    }
+                    
+                }
                 
                 for(let key of Object.keys(keyBindings)){
                     if(key === keyPress){
                         
                         keys[keyBindings[key]].click()
                         keys[keyBindings[key]].style.backgroundColor ="red";
-                        console.log(keys[keyBindings[key]])
+                        keys[keyBindings[key]].dataset.status ="active";
+                        activecolor(keys[keyBindings[key]])
+
                     }
                     
                 }
+                
             }
     /*
             if(keyPress == "q"){
@@ -117,17 +142,6 @@ const keyBoard =()=>{
                 console.log(keys[9])
                 
             }*/
-        }
-        let delay = 0
-        console.log(delay)
-        while(delay < 1){
-            setTimeout(() => {
-                keys.forEach(element => {
-                element.style.backgroundColor ="white"
-                });
-                console.log(delay)
-            }, 280);
-            delay++
         }
         
     }
